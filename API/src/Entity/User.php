@@ -2,119 +2,267 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
- * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D6495E237E06", columns={"name"})})
- * @ORM\Entity
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Column(name="iduser", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $iduser;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=180, nullable=false)
+     * @ORM\Column(name="role", type="string", length=45, nullable=false)
      */
-    private $name;
-
-    /**
-     * @var json
-     *
-     * @ORM\Column(name="roles", type="json", nullable=false)
-     */
-    private $roles;
+    private $role;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nickname", type="string", length=45, nullable=false)
      */
-    private $password;
+    private $nickname;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="pass", type="string", length=45, nullable=false)
      */
-    private $apiToken;
+    private $pass;
 
     /**
-     * @ORM\Column(type="string", length=1000, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=45, nullable=false)
      */
-    private $date;
+    private $email;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="number", type="string", length=45, nullable=true)
+     */
+    private $number;
 
-    public function getId(): ?int
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="favourite_weather", type="string", length=45, nullable=false)
+     */
+    private $favouriteWeather;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="main_language", type="string", length=45, nullable=false)
+     */
+    private $mainLanguage;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="english", type="boolean", nullable=false)
+     */
+    private $english;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="continent", type="string", length=45, nullable=false)
+     */
+    private $continent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=45, nullable=false)
+     */
+    private $country;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="City", inversedBy="idUser")
+     * @ORM\JoinTable(name="travel",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="id_User", referencedColumnName="iduser")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="id_City", referencedColumnName="idcity")
+     *   }
+     * )
+     */
+    private $idCity;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        return $this->id;
+        $this->idCity = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function getName(): ?string
+    public function getIduser(): ?int
     {
-        return $this->name;
+        return $this->iduser;
     }
 
-    public function setName(string $name): self
+    public function getRole(): ?string
     {
-        $this->name = $name;
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
 
-    public function getRoles() // :?array
+    public function getNickname(): ?string
     {
-        return $this->roles;
+        return $this->nickname;
     }
 
-    public function setRoles(array $roles): self
+    public function setNickname(string $nickname): self
     {
-        $this->roles = $roles;
+        $this->nickname = $nickname;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPass(): ?string
     {
-        return $this->password;
+        return $this->pass;
     }
 
-    public function setPassword(string $password): self
+    public function setPass(string $pass): self
     {
-        $this->password = $password;
+        $this->pass = $pass;
 
         return $this;
     }
 
-    public function getApiToken(): ?string
+    public function getEmail(): ?string
     {
-        return $this->apiToken;
+        return $this->email;
     }
 
-    public function setApiToken(?string $apiToken): self
+    public function setEmail(string $email): self
     {
-        $this->apiToken = $apiToken;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getDate(): ?string
+    public function getNumber(): ?string
     {
-        return $this->date;
+        return $this->number;
     }
 
-    public function setDate(?string $date): self
+    public function setNumber(?string $number): self
     {
-        $this->date = $date;
+        $this->number = $number;
 
         return $this;
     }
+
+    public function getFavouriteWeather(): ?string
+    {
+        return $this->favouriteWeather;
+    }
+
+    public function setFavouriteWeather(string $favouriteWeather): self
+    {
+        $this->favouriteWeather = $favouriteWeather;
+
+        return $this;
+    }
+
+    public function getMainLanguage(): ?string
+    {
+        return $this->mainLanguage;
+    }
+
+    public function setMainLanguage(string $mainLanguage): self
+    {
+        $this->mainLanguage = $mainLanguage;
+
+        return $this;
+    }
+
+    public function getEnglish(): ?bool
+    {
+        return $this->english;
+    }
+
+    public function setEnglish(bool $english): self
+    {
+        $this->english = $english;
+
+        return $this;
+    }
+
+    public function getContinent(): ?string
+    {
+        return $this->continent;
+    }
+
+    public function setContinent(string $continent): self
+    {
+        $this->continent = $continent;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|City[]
+     */
+    public function getIdCity(): Collection
+    {
+        return $this->idCity;
+    }
+
+    public function addIdCity(City $idCity): self
+    {
+        if (!$this->idCity->contains($idCity)) {
+            $this->idCity[] = $idCity;
+        }
+
+        return $this;
+    }
+
+    public function removeIdCity(City $idCity): self
+    {
+        $this->idCity->removeElement($idCity);
+
+        return $this;
+    }
+
 }
