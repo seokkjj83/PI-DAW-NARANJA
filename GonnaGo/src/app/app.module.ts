@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { MainComponent } from './main/main.component';
 import { VisitedPageComponent } from './visited-page/visited-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -25,6 +26,12 @@ import { SavedPageComponent } from './saved-page/saved-page.component';
     MenuComponent,
     CardComponent,
     SavedPageComponent
+=======
+
+@NgModule({
+  declarations: [
+    AppComponent
+>>>>>>> Front-End
   ],
   imports: [
     BrowserModule,
