@@ -14,6 +14,9 @@ import { FormPageComponent } from './form-page/form-page.component';
 import { MenuComponent } from './menu/menu.component';
 import { CardComponent } from './card/card.component';
 import { SavedPageComponent } from './saved-page/saved-page.component';
+import {ButtonModule} from 'primeng/button';
+
+
 
 @NgModule({
   declarations: [
@@ -26,12 +29,16 @@ import { SavedPageComponent } from './saved-page/saved-page.component';
     FormPageComponent,
     MenuComponent,
     CardComponent,
-    SavedPageComponent
+    SavedPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+<<<<<<< HEAD
     CardModule
+=======
+    ButtonModule
+>>>>>>> 857ba7730429cd24dc79408f4fcf91ac93e249ea
   ],
   providers: [],
   bootstrap: [AppComponent]
