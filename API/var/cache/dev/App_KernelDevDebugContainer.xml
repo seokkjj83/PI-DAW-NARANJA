@@ -156,6 +156,7 @@
     <service id="App\Controller\CityController" class="App\Controller\CityController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Repository\CityRepository"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.5nX7ca3.App\Controller\CityController"/>
       </call>
@@ -163,6 +164,7 @@
     <service id="App\Controller\UserController" class="App\Controller\UserController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Repository\UserRepository"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.5nX7ca3.App\Controller\UserController"/>
       </call>
@@ -170,10 +172,12 @@
     <service id="App\Repository\CityRepository" class="App\Repository\CityRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">

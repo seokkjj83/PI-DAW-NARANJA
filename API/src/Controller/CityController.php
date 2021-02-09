@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CityController extends AbstractController
 {
@@ -57,9 +61,9 @@ class CityController extends AbstractController
             'size' => $city->getSize(),
             'nativeLanguage' => $city->getNativeLanguage(),
             'continent' => $city->getContinent(),
-            'nativeLanguageDificulty' => $city->getNativeLanguageDificulty(),
+            'nativeLanguageDifficulty' => $city->getNativelanguageDifficulty(),
             'costOfLiving' => $city->getCostOfLiving(),
-            'role' => $city->getRrole(),
+            'role' => $city->getRole(),
             'img' => $city->getImg(),
             'country' => $city->getCountry(),
             'video' => $city->getVideo()
@@ -85,9 +89,9 @@ class CityController extends AbstractController
                 'size' => $city->getSize(),
                 'nativeLanguage' => $city->getNativeLanguage(),
                 'continent' => $city->getContinent(),
-                'nativeLanguageDificulty' => $city->getNativeLanguageDificulty(),
+                'nativeLanguageDifficulty' => $city->getNativelanguageDifficulty(),
                 'costOfLiving' => $city->getCostOfLiving(),
-                'role' => $city->getRrole(),
+                'role' => $city->getRole(),
                 'img' => $city->getImg(),
                 'country' => $city->getCountry(),
                 'video' => $city->getVideo()
@@ -110,7 +114,7 @@ class CityController extends AbstractController
         empty($data['size']) ? true : $city->setSize($data['size']);
         empty($data['nativeLanguage']) ? true : $city->setNativeLanguage($data['nativeLanguage']);
         empty($data['continent']) ? true : $city->setContinent($data['continent']);
-        empty($data['nativeLanguageDificulty']) ? true : $city->setNativeLanguageDificulty($data['nativeLanguageDificulty']);
+        empty($data['nativeLanguageDifficulty']) ? true : $city->getNativelanguageDifficulty($data['nativeLanguageDifficulty']);
         empty($data['costOfLiving']) ? true : $city->setCostOfLiving($data['costOfLiving']);
         empty($data['role']) ? true : $city->setRole($data['role']);
         empty($data['img']) ? true : $city->setImg($data['img']);

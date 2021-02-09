@@ -26,11 +26,11 @@ class CityRepository extends ServiceEntityRepository
         $nuevoCity = new City();
 
         $nuevoCity->setName($name);
-        $nuevoCity->setWeaher($weather);
+        $nuevoCity->setWeather($weather);
         $nuevoCity->setSize($size);
         $nuevoCity->setNativeLanguage($nativeLanguage);
         $nuevoCity->setContinent($continent);
-        $nuevoCity->setNativeLanguaeDifficulty($nativeLanguageDificulty);
+        $nuevoCity->setNativeLanguageDifficulty($nativeLanguageDificulty);
         $nuevoCity->setCostOfLiving($costOfLiving);
         $nuevoCity->setRole($role);
         $nuevoCity->setImg($img);
