@@ -26,33 +26,47 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $nombre = $data['nombre'];
-        $descripcion = $data['descripcion'];
-        $imagen = $data['imagen'];
-        $tiempoEstimado = $data['tiempo_estimado'];
+        $role = $data['role'];
+        $nickname = $data['nickname'];
+        $pass = $data['pass'];
+        $email = $data['email'];
+        $number = $data['number'];
+        $favouriteWeather = $data['favouriteWeather'];
+        $mainLanguage = $data['mainLanguage'];
+        $english = $data['english'];
+        $continent = $data['continent'];
+        $country = $data['country'];
 
-        if (empty($nombre) || empty($descripcion) || empty($imagen) || empty($tiempoEstimado)) {
+        if (
+            empty($nombre) || empty($descripcion) || empty($imagen) || empty($tiempoEstimado) || empty($nombre) || empty($descripcion) ||
+            empty($imagen) || empty($tiempoEstimado) || empty($nombre) || empty($descripcion)
+        ) {
             throw new NotFoundHttpException('Expecting mandatory parameters!');
         }
 
-        $this->userRepository->saveUser($nombre, $descripcion, $imagen, $tiempoEstimado);
+        $this->userRepository->saveUser($role, $nickname, $pass, $email, $number, $favouriteWeather, $mainLanguage, $english, $continent, $country);
 
         return new JsonResponse(['status' => 'User Created'], Response::HTTP_CREATED);
     }
 
     /**
-     * @Route("/getUser/{id}", name="getUser", methods={"GET"})
+     * @Route("/getUser/{idUser}", name="getUser", methods={"GET"})
      */
-    public function getUser($id): JsonResponse
+    public function getUsr($idUser): JsonResponse
     {
-        $user = $this->userRepository->findOneBy(['id' => $id]);
+        $user = $this->userRepository->findOneBy(['idUser' => $idUser]);
 
         $data = [
-            'id' => $user->getId(),
-            'nombre' => $user->getNombre(),
-            'descripcion' => $user->getDescripcion(),
-            'imagen' => $user->getImagen(),
-            'tiempo_estimado' => $user->getTiempoEstimado()
+            'role' => $user->getRole(),
+            'nickname' => $user->getNickname(),
+            'pass' => $user->getPass(),
+            'email' => $user->getEmail(),
+            'number' => $user->getNumber(),
+            'favouriteWeather' => $user->getFavouriteWeather(),
+            'mainLanguage' => $user->getMainLanguage(),
+            'english' => $user->getEnglish(),
+            'continent' => $user->getContinent(),
+            'country' => $user->getCountry()
         ];
 
         return new JsonResponse($data, Response::HTTP_OK);
@@ -67,12 +81,18 @@ class UserController extends AbstractController
 
         $data = [];
 
-        foreach ($users as $p) {
+        foreach ($users as $user) {
             $data[] = [
-                'id' => $p->getId(),
-                'nombre' => $p->getNombre(),
-                'descripcion' => $p->getDescripcion(),
-                'imagen' => $p->getImagen(),
+                'role' => $user->getRole(),
+                'nickname' => $user->getNickname(),
+                'pass' => $user->getPass(),
+                'email' => $user->getEmail(),
+                'number' => $user->getNumber(),
+                'favouriteWeather' => $user->getFavouriteWeather(),
+                'mainLanguage' => $user->getMainLanguage(),
+                'english' => $user->getEnglish(),
+                'continent' => $user->getContinent(),
+                'country' => $user->getCountry()
             ];
         }
 
@@ -80,37 +100,22 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/getUsersMenorTiempo/{tiempo}", name="getUsersMenorTiempo", methods={"GET"})
+     * @Route("/updateUser/{idUser}", name="updateUser", methods={"PUT"})
      */
-    public function getUsersConTiempoEstimadoMenor($tiempo): JsonResponse
+    public function editUser(Request $request, $idUser): JsonResponse
     {
-        $data = $this->userRepository->getUsersConTiempoEstimadoMenor($tiempo);
-
-        return new JsonResponse($data, Response::HTTP_OK);
-    }
-
-    /**
-     * @Route("/getUsersConCategoria/{id}", name="getUsersConCategoria", methods={"GET"})
-     */
-    public function getUsersConCategoria($id): JsonResponse
-    {
-        $data = $this->userRepository->getUsersCategoria($id);
-
-        return new JsonResponse($data, Response::HTTP_OK);
-    }
-
-    /**
-     * @Route("/updateUser/{id}", name="updateUser", methods={"PUT"})
-     */
-    public function editUser(Request $request, $id): JsonResponse
-    {
-        $user = $this->userRepository->findOneBy(['id' => $id]);
+        $user = $this->userRepository->findOneBy(['idUser' => $idUser]);
         $data = json_decode($request->getContent(), true);
-
-        empty($data['nombre']) ? true : $user->setNombre($data['nombre']);
-        empty($data['descripcion']) ? true : $user->setDescripcion($data['descripcion']);
-        empty($data['imagen']) ? true : $user->setImagen($data['imagen']);
-        empty($data['tiempo_estimado']) ? true : $user->setTiempoEstimado($data['tiempo_estimado']);
+        empty($data['role']) ? true : $user->setRole($data['role']);
+        empty($data['nickname']) ? true : $user->setNickname($data['nickname']);
+        empty($data['pass']) ? true : $user->setPass($data['pass']);
+        empty($data['email']) ? true : $user->setEmail($data['email']);
+        empty($data['number']) ? true : $user->setNumber($data['number']);
+        empty($data['favouriteWeather']) ? true : $user->setFavouriteWeather($data['favouriteWeather']);
+        empty($data['mainLanguage']) ? true : $user->setMainLanguage($data['mainLanguage']);
+        empty($data['english']) ? true : $user->setEnglish($data['english']);
+        empty($data['continent']) ? true : $user->setContinent($data['continent']);
+        empty($data['country']) ? true : $user->setCountry($data['country']);
 
         $updatedUser = $this->userRepository->updateUser($user);
 
@@ -118,11 +123,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/deleteUser/{id}", name="deleteUser", methods={"DELETE"})
+     * @Route("/deleteUser/{idUser}", name="deleteUser", methods={"DELETE"})
      */
-    public function deleteUser($id): JsonResponse
+    public function deleteUser($idUser): JsonResponse
     {
-        $user = $this->userRepository->findOneBy(['id' => $id]);
+        $user = $this->userRepository->findOneBy(['idUser' => $idUser]);
 
         $this->userRepository->removeUser($user);
 

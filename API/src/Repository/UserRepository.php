@@ -21,17 +21,17 @@ class UserRepository extends ServiceEntityRepository
         $this->manager = $manager;
     }
 
-    public function saveUser($role, $nickname, $pass, $email, $number, $favouriteWeater, $mainLenguage, $english, $continent, $country)
+    public function saveUser($role, $nickname, $pass, $email, $number, $favouriteWeather, $mainLanguage, $english, $continent, $country)
     {
         $nuevoUser = new User();
 
-        $nuevoUser->SetRole($role);
-        $nuevoUser->SetNickname($nickname);
-        $nuevoUser->SetPass($pass);
-        $nuevoUser->SetEmail($email);
-        $nuevoUser->SetNumber($number);
-        $nuevoUser->SetFavouriteWeather($favouriteWeater);
-        $nuevoUser->setMainLanguage($mainLenguage);
+        $nuevoUser->setRole($role);
+        $nuevoUser->setNickname($nickname);
+        $nuevoUser->setPass($pass);
+        $nuevoUser->setEmail($email);
+        $nuevoUser->setNumber($number);
+        $nuevoUser->setFavouriteWeather($favouriteWeather);
+        $nuevoUser->setMainLanguage($mainLanguage);
         $nuevoUser->setEnglish($english);
         $nuevoUser->setContinent($continent);
         $nuevoUser->setCountry($country);
@@ -54,19 +54,7 @@ class UserRepository extends ServiceEntityRepository
         $this->manager->flush();
     }
 
-    public function getUsersCategoria($id)
-    {
-        //$em = $this->getDoctrine()->getManager();
-        //$em = $this->getRepository('AppBundle:User');
-        $qb = $this->manager->createQueryBuilder();
-
-        $qb->select('p')
-            ->from(User::class, 'p')
-            ->where('p.categoria_id = :categ')
-            ->setParameter('categ', $id);
-        return $qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-    }
-
+    /*
     public function getUsersConTiempoEstimadoMenor($tiempo)
     {
         $qb = $this->manager->createQueryBuilder();
@@ -77,6 +65,7 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('tiempo', $tiempo);
         return $qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
+    */
 
     // /**
     //  * @return User[] Returns an array of User objects
