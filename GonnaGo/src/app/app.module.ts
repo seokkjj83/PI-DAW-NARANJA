@@ -18,6 +18,7 @@ import {ButtonModule} from 'primeng/button';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ButtonModule,
     CardModule
   ],
   providers: [],
