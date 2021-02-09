@@ -34,11 +34,7 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     BrowserModule,
     AppRoutingModule,
-<<<<<<< HEAD
     CardModule
-=======
-    ButtonModule
->>>>>>> 857ba7730429cd24dc79408f4fcf91ac93e249ea
   ],
   providers: [],
   bootstrap: [AppComponent]
