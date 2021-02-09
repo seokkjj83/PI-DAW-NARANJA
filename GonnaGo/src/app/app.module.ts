@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {CardModule} from 'primeng/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { MenuComponent } from './menu/menu.component';
 import { CardComponent } from './card/card.component';
 import { SavedPageComponent } from './saved-page/saved-page.component';
 import {ButtonModule} from 'primeng/button';
+
 
 
 
@@ -33,7 +35,8 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule
+    ButtonModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
